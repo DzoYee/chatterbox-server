@@ -18,12 +18,12 @@ var defaultCorsHeaders = {
     "access-control-max-age": 10 // Seconds.
 };
 var fs = require("fs");
-var db = require('./database')
+var db = require('./database');
 var requestHandler = function(request, response) {
     var statusCode;
     var headers = defaultCorsHeaders;
     headers['Content-Type'] = "application/JSON";
-    requestHandler.database = requestHandler.database || db
+    requestHandler.database = requestHandler.database || db;
 
 
 
@@ -47,7 +47,7 @@ var requestHandler = function(request, response) {
             } else {
               console.log("Write Copy Success");
             }
-          })
+          });
           response.writeHead(statusCode, headers);
           response.end(JSON.stringify(requestHandler.database));
 
@@ -55,46 +55,46 @@ var requestHandler = function(request, response) {
           statusCode = 200;
           if(request.url === "/" || request.url.indexOf("?username") > -1){
               fs.readFile(".././client/index.html", function(errors, contents){
-                  headers['Content-Type'] = "text/html"
+                  headers['Content-Type'] = "text/html";
                   response.writeHead(statusCode, headers);
                 response.write(contents);
                 response.end();
-              })
+              });
           }else if(request.url === "/styles/styles.css"){
               fs.readFile(".././client/styles/styles.css", function(errors, contents){
-                  headers['Content-Type'] = "text/css"
+                  headers['Content-Type'] = "text/css";
                   response.writeHead(statusCode, headers);
                   response.write(contents);
                   response.end();
-              })
+              });
           }else if(request.url === "/bower_components/jquery/dist/jquery.js"){
               fs.readFile(".././client/bower_components/jquery/dist/jquery.js", function(errors, contents){
-                  headers['Content-Type'] = "application/javascript"
+                  headers['Content-Type'] = "application/javascript";
                   response.writeHead(statusCode, headers);
                   response.write(contents);
                   response.end();
-              })
+              });
           }else if(request.url === "/env/config.js"){
              fs.readFile(".././client/env/config.js", function(errors, contents){
-                 headers['Content-Type'] = "application/javascript"
+                 headers['Content-Type'] = "application/javascript";
                  response.writeHead(statusCode, headers);
                  response.write(contents);
                  response.end();
-             })
+             });
           } else if(request.url === "/scripts/app.js"){
               fs.readFile(".././client/scripts/app.js", function(errors, contents){
-                  headers['Content-Type'] = "application/javascript"
+                  headers['Content-Type'] = "application/javascript";
                   response.writeHead(statusCode, headers);
                   response.write(contents);
                   response.end();
-              })
+              });
           }  else if(request.url === "/images/spiffygif_46x46.gif"){
               fs.readFile(".././client/images/spiffygif_46x46.gif", function(errors, contents){
-                  headers['Content-Type'] = "image/gifß"
+                  headers['Content-Type'] = "image/gifß";
                   response.writeHead(statusCode, headers);
                   response.write(contents);
                   response.end();
-              })
+              });
           } else {
               response.writeHead(statusCode, headers);
               response.end(JSON.stringify(requestHandler.database));
@@ -102,7 +102,7 @@ var requestHandler = function(request, response) {
 
       } else if(request.method === "OPTIONS"){
       statusCode = 200;
-      response.writeHead(statusCode)
+      response.writeHead(statusCode);
       response.end(JSON.stringify(requestHandler.database));
 
       } else {
